@@ -30,6 +30,15 @@ export default defineConfig({
               .schemaType("splashPage")
               .documentId("splashPage")
           ),
+        S.listItem()
+          .title("Portfolio Files")
+          .id("portfolioFiles")
+          .child(
+            S.document()
+              .schemaType("portfolioFiles")
+              .documentId("portfolioFiles")
+          ),
+          
           
       ])
   }
