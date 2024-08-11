@@ -9,8 +9,32 @@ export default defineConfig({
 
   projectId: 'hgi5wws6',
   dataset: 'production',
+  plugins: [structureTool({
+    structure: (S) => 
+      S.list()
+      .title("Content")
+      .items([
+        S.listItem()
+          .title("About Page")
+          .id("aboutPage")
+          .child(
+            S.document()
+              .schemaType("aboutPage")
+              .documentId("aboutPage")
+          ),
+        S.listItem()
+          .title("Splash Page")
+          .id("splashPage")
+          .child(
+            S.document()
+              .schemaType("splashPage")
+              .documentId("splashPage")
+          ),
+          
+      ])
+  }
 
-  plugins: [structureTool(), visionTool()],
+  ), visionTool()],
 
   schema: {
     types: schemaTypes,
