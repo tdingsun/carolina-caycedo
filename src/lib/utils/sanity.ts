@@ -20,11 +20,22 @@ export async function getAboutPage(): Promise<AboutPage> {
 }
 
 export async function getSplashPage(): Promise<SplashPage> {
-	return await client.fetch(groq`*[_id == "splashPage"][0]`)
+	return await client.fetch(
+		groq`*[_id == "splashPage"][0]{..., 
+			splashVids[]{..., 'url':asset->url},
+			splashImgs[]{..., 'originalFilename':asset->originalFilename}
+		}`
+	)
 }
 
 export async function getPortfolioFiles(): Promise<PortfolioFiles> {
-	return await client.fetch(groq`*[_id == "portfolioFiles"][0]`)
+	return await client.fetch(
+		groq`*[_id == "portfolioFiles"][0]
+		{..., 
+			portfolioPDF{..., 'url':asset->url, 'originalFilename':asset->originalFilename}, 
+			videoPortfolioPDF{..., 'url':asset->url, 'originalFilename':asset->originalFilename}
+		}`
+	)
 }
 
 export interface AboutPage {
