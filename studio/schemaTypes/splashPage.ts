@@ -10,9 +10,26 @@ export default defineType({
             title: 'Splash Page Images',
             type: 'array',
             of: [{
-                name: 'img',
+                name: 'imgObj',
                 title: 'Image',
-                type: 'image'
+                type: 'object',
+                fields: [
+                    {
+                        name: 'img',
+                        title: 'Image',
+                        type: 'image',
+                    },
+                    {
+                        name: 'caption',
+                        title: 'Caption',
+                        type: 'blockContent',
+                    },
+                    {
+                        name: 'alt',
+                        title: 'Alt Text',
+                        type: 'string',
+                    }
+                ],
             }]
         }),
         defineField({
