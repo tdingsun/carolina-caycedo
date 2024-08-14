@@ -31,19 +31,25 @@
 </script>
 
 
-<div class="p-2">
-    <div class="flex gap-2">
-        <PortableText {components} value={data.aboutPage.aboutPageBlurb}></PortableText>
-        <img src={getImgUrl(data.aboutPage.coverImage)} class="w-96 object-contain object-top"/>
-    </div>
-    <div>
-        {#if data.aboutPage.contactLinks && data.aboutPage.contactLinks.length}
-        <div class="flex gap-4">
-            {#each data.aboutPage.contactLinks as link}
-                <a href={link.url} class="underline hover:no-underline">{link.label}</a>
-            {/each}
+<div class="px-6 pt-2  gap-6 flex flex-col">
+    <div class="flex flex-col md:flex-row border-y-2 border-dashed border-[darkslategrey] py-6 divide-y-2 md:divide-y-0 md:divide-x-2 divide-[darkslategrey] divide-dashed">
+        <div class="max-w-xl pr-6 md:text-xl font-medium tracking-[0.1px]">
+            <PortableText {components} value={data.aboutPage.aboutPageBlurb}></PortableText>
+            <div class="pt-6 border-t-2 border-dashed border-[darkslategrey]">
+                {#if data.aboutPage.contactLinks && data.aboutPage.contactLinks.length}
+                <div class="flex divide-x-2 divide-dashed divide-[darkslategrey]">
+                    {#each data.aboutPage.contactLinks as link}
+                        <a href={link.url} class="underline hover:no-underline first:pl-0 px-6">{link.label}</a>
+                    {/each}
+                </div>
+                {/if}
+            </div>
         </div>
-        {/if}
+        <div class="flex-grow hidden lg:block px-24 py-20">
+            <div class="rounded-full bg-[cornsilk] w-full h-full shadow-[0_0_4rem_4rem_cornsilk]"></div>
+        </div>
+        <img src={getImgUrl(data.aboutPage.coverImage)} class="w-96 object-contain object-top pl-6"/>
     </div>
+   
 </div>
 
