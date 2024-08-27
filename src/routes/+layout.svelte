@@ -7,7 +7,7 @@
     let videoPortfolioURL = data.portfolioFiles.videoPortfolioPDF.url + '/' + data.portfolioFiles.videoPortfolioPDF.originalFilename;
 </script>
 
-<div class='bg-[whitesmoke] text-[darkslategrey] min-h-screen'>
+<div class='bg-[darkslategrey] min-h-screen'>
     <Nav {portfolioURL} {videoPortfolioURL}></Nav>
     <slot />
 </div>
