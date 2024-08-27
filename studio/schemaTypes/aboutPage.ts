@@ -11,9 +11,9 @@ export default defineType({
             type: 'blockContent',
         }),
         defineField({
-            name: 'coverImage',
-            title: 'About Page Image',
-            type: 'image',
+            name: 'coverVideo',
+            title: 'About Page Video',
+            type: 'file'
         }),
         defineField({
             name: 'contactLinks',

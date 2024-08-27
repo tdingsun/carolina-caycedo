@@ -16,7 +16,9 @@ export const client = createClient({
 });
 
 export async function getAboutPage(): Promise<AboutPage> {
-	return await client.fetch(groq`*[_id == "aboutPage"][0]`)
+	return await client.fetch(groq`*[_id == "aboutPage"][0]{...,
+		coverVideo{..., 'url':asset->url}
+	}`)
 }
 
 export async function getSplashPage(): Promise<SplashPage> {
@@ -42,7 +44,7 @@ export interface AboutPage {
 	_type: 'aboutPage';
 	_id: 'aboutPage';
 	aboutPageBlurb?: any;
-	coverImage?: any;
+	coverVideo?: any;
 	contactLinks?: Link[];
 }
 

@@ -6,6 +6,8 @@
     import StyledLink from '$lib/components/StyledLink.svelte';
     import type { PageData } from './$types';
     import { urlFor } from '$lib/utils/image';
+	import StyledNavLink from '$lib/components/StyledNavLink.svelte';
+	import StyledMainText from '$lib/components/StyledMainText.svelte';
     export let data: PageData;
     const components: Partial<PortableTextComponents> = {
 		block: {
@@ -30,26 +32,36 @@
 
 </script>
 
-
-<div class="px-6 pt-2  gap-6 flex flex-col">
-    <div class="flex flex-col md:flex-row border-y-2 border-dashed border-[darkslategrey] py-6 divide-y-2 md:divide-y-0 md:divide-x-2 divide-[darkslategrey] divide-dashed">
-        <div class="max-w-xl pr-6 md:text-xl font-medium tracking-[0.1px]">
-            <PortableText {components} value={data.aboutPage.aboutPageBlurb}></PortableText>
-            <div class="pt-6 border-t-2 border-dashed border-[darkslategrey]">
-                {#if data.aboutPage.contactLinks && data.aboutPage.contactLinks.length}
-                <div class="flex divide-x-2 divide-dashed divide-[darkslategrey]">
-                    {#each data.aboutPage.contactLinks as link}
-                        <a href={link.url} class="underline hover:no-underline first:pl-0 px-6">{link.label}</a>
-                    {/each}
-                </div>
-                {/if}
-            </div>
-        </div>
-        <div class="flex-grow hidden lg:block px-24 py-20">
-            <div class="rounded-full bg-[cornsilk] w-full h-full shadow-[0_0_4rem_4rem_cornsilk]"></div>
-        </div>
-        <img src={getImgUrl(data.aboutPage.coverImage)} class="w-96 object-contain object-top pl-6"/>
-    </div>
-   
+<div class="fixed bottom-0 w-full h-full overflow-hidden">
+    <video autoplay={true} muted={true} loop={true} playsinline={true} class="object-cover min-w-full min-h-full w-auto h-auto absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+        <source src={data.aboutPage.coverVideo.url} />
+    </video>
 </div>
 
+<div class="max-w-2xl lg:max-w-5xl p-4 sm:p-8 tracking-wide w-full relative pointer-events-none">
+    <StyledMainText class="text-xl md:text-2xl sm:pb-16">
+        <PortableText {components} value={data.aboutPage.aboutPageBlurb}></PortableText>
+    </StyledMainText>
+    {#if data.aboutPage.contactLinks && data.aboutPage.contactLinks.length}
+        <div class="sm:hidden flex flex-col gap-4 justify-between items-start p-2 pt-16  w-full">
+            {#each data.aboutPage.contactLinks as link}
+                <StyledNavLink>
+                    <a href={link.url}>{link.label}</a>
+                </StyledNavLink>
+            {/each}
+        </div>
+    {/if}
+
+</div>
+
+
+
+{#if data.aboutPage.contactLinks && data.aboutPage.contactLinks.length}
+<div class="hidden sm:flex justify-between p-8 fixed bottom-0 w-full">
+    {#each data.aboutPage.contactLinks as link}
+        <StyledNavLink>
+            <a href={link.url} class=" first:pl-0 px-6">{link.label}</a>
+        </StyledNavLink>
+    {/each}
+</div>
+{/if}
