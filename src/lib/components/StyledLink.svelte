@@ -5,6 +5,6 @@
     }>
     $: ({value} = portableText)
 </script>
-<a href={value.href} target="_blank" class="underline">
+<a href={value.href} target="_blank" class="underline hover:[text-shadow:_0px_0px_1px_cornsilk]">
     <slot />
 </a>
