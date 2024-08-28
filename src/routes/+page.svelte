@@ -82,7 +82,7 @@
 		</button>
 	</div>
 
-	<div class="w-full flex justify-center">
+	<div class="w-full sm:hidden flex justify-center">
 		<StyledMainText class="text-xl">
 			<PortableText {components} value={$currLightboxDescription}></PortableText>
 		</StyledMainText>
