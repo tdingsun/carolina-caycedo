@@ -44,7 +44,7 @@
             moonCoords = new Array(splashImgs.length);
             let centerX = window.innerWidth * 0.5 - 24;
             let centerY = window.innerHeight * 0.5 - 24;
-            let r = Math.min(centerX, centerY) - 24;
+            let r = Math.min(centerX, centerY) - 36;
 
             for(let i = 0; i < splashImgs.length; i++){
                 if((direction * Math.cos(2 * Math.PI / (splashImgs.length) * (i+1)) >= 0)){
