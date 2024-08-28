@@ -98,7 +98,7 @@
 {/if}
 
 {#if currHoverImgIdx !== null}
-    <div class="fixed bottom-4 w-screen flex justify-center">
+    <div class="hidden sm:flex fixed bottom-4 w-screen justify-center">
         <StyledMainText>
             <PortableText {components} value={splashImgs[currHoverImgIdx].caption}></PortableText>
         </StyledMainText>
