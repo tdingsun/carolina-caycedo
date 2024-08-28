@@ -22,7 +22,6 @@
         }
 	};
 
-
     const getImgUrl = (image: any) => {
         let url = urlFor(image.asset._ref).width(1200).format('webp').url();
         let urlParts = url.split('?');
@@ -51,17 +50,14 @@
             {/each}
         </div>
     {/if}
-
 </div>
-
-
 
 {#if data.aboutPage.contactLinks && data.aboutPage.contactLinks.length}
-<div class="hidden sm:flex justify-between p-8 fixed bottom-0 w-full">
-    {#each data.aboutPage.contactLinks as link}
-        <StyledNavLink>
-            <a href={link.url} class=" first:pl-0 px-6">{link.label}</a>
-        </StyledNavLink>
-    {/each}
-</div>
+    <div class="hidden sm:flex justify-between p-8 fixed bottom-0 w-full">
+        {#each data.aboutPage.contactLinks as link}
+            <StyledNavLink>
+                <a href={link.url} target="_blank" class=" first:pl-0 px-6">{link.label}</a>
+            </StyledNavLink>
+        {/each}
+    </div>
 {/if}

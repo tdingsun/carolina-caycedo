@@ -1,14 +1,5 @@
 <script lang="ts">
     export let splashVids;
-    import { urlFor } from '$lib/utils/image';
-	import { onMount } from 'svelte';
-
-    const getImgUrl = (image: any) => {
-        let url = urlFor(image.asset._ref).width(1200).format('webp').url();
-        let urlParts = url.split('?');
-        url = urlParts[0] + '/' + image.originalFilename + '?' + urlParts[1]
-        return url;
-    }
     let vidIndex = Math.floor(Math.random() * splashVids.length);
 </script>
 

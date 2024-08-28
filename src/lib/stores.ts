@@ -7,6 +7,8 @@ export const lightboxOpen = writable<boolean>(false);
 export const currLightboxImageArray = writable<any[]>([]);
 export const currLightboxImageIdx = writable<number>(undefined);
 
+export const currLightboxDescription = writable<any>(undefined);
+
 export const getImgUrl = (imgRef: any) => {
 	return urlFor(imgRef)
 		.width(Math.min(window.innerWidth * 2, 2400))
@@ -14,10 +16,10 @@ export const getImgUrl = (imgRef: any) => {
 		.url();
 };
 
-export const setLightbox = (e: any, imageArray?: any, imageIdx?: any, imgRef?: any) => {
+export const setLightbox = (e: any, imageArray?: any, imageIdx?: any, imgObj?: any) => {
 	let src;
-	if (imgRef) {
-		src = getImgUrl(imgRef);
+	if (imgObj) {
+		src = getImgUrl(imgObj.img.asset._ref);
 	} else {
 		src = e.target.src;
 	}
@@ -25,6 +27,7 @@ export const setLightbox = (e: any, imageArray?: any, imageIdx?: any, imgRef?: a
 	lightboxOpen.set(true);
 	currLightboxImageArray.set(imageArray);
 	currLightboxImageIdx.set(imageIdx);
+	currLightboxDescription.set(imgObj.caption);
 };
 export const closeLightbox = () => {
 	lightboxOpen.set(false);
@@ -37,9 +40,11 @@ export const setNextLightboxImage = (e: Event) => {
 	} else {
 		currLightboxImageIdx.update((idx) => idx + 1);
 	}
-	const imgRef = get(currLightboxImageArray)[get(currLightboxImageIdx)].img.asset._ref;
+	const imgObj = get(currLightboxImageArray)[get(currLightboxImageIdx)];
+	const imgRef = imgObj.img.asset._ref;
 	const src = getImgUrl(imgRef);
 	get(lightbox).style.backgroundImage = 'url(' + src + ')';
+	currLightboxDescription.set(imgObj.caption);
 };
 
 export const setPrevLightboxImage = (e: Event) => {
@@ -49,7 +54,9 @@ export const setPrevLightboxImage = (e: Event) => {
 	} else {
 		currLightboxImageIdx.update((idx) => idx - 1);
 	}
-	const imgRef = get(currLightboxImageArray)[get(currLightboxImageIdx)].img.asset._ref;
+	const imgObj = get(currLightboxImageArray)[get(currLightboxImageIdx)];
+	const imgRef = imgObj.img.asset._ref;
 	const src = getImgUrl(imgRef);
 	get(lightbox).style.backgroundImage = 'url(' + src + ')';
+	currLightboxDescription.set(imgObj.caption);
 };

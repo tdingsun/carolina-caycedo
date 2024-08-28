@@ -44,8 +44,7 @@
             moonCoords = new Array(splashImgs.length);
             let centerX = window.innerWidth * 0.5 - 24;
             let centerY = window.innerHeight * 0.5 - 24;
-            let r = Math.min(centerX, centerY) - 48;
-
+            let r = Math.min(centerX, centerY) - 24;
 
             for(let i = 0; i < splashImgs.length; i++){
                 if((direction * Math.cos(2 * Math.PI / (splashImgs.length) * (i+1)) >= 0)){
@@ -73,11 +72,8 @@
                     moonCoords = new Array(splashImgs.length).fill([window.innerWidth,window.innerHeight]);
                 }
                 direction = -1 * direction;
-
             }
         }, 1000)
-
-       
     })
 
     let currHoverImgIdx: number|null = null;
@@ -88,12 +84,13 @@
     const rmCurrHoverImgIdx = () => {
         currHoverImgIdx = null;
     }
+
 </script>
 {#if browser && moonCoords}
 <div class="w-full h-screen flex justify-center items-center p-4 bg-gray-300">
         {#each splashImgs as imgObj, idx}
         <div style="left:{moonCoords[idx][0]}px; top:{moonCoords[idx][1]}px;" class="w-12 h-12 fixed">
-            <img alt={imgObj.alt} on:mouseover={() => setCurrHoverImgIdx(idx)} on:focus={() => setCurrHoverImgIdx(idx)} on:mouseout={() => rmCurrHoverImgIdx()} on:blur={() => rmCurrHoverImgIdx()} on:click={(e) => setLightbox(e, splashImgs, 0, imgObj.img.asset._ref)} src={getTinyImgUrl(imgObj.img)} class=" hover:cursor-pointer max-w-full max-h-full"/>
+            <img alt={imgObj.alt} on:mouseover={() => setCurrHoverImgIdx(idx)} on:focus={() => setCurrHoverImgIdx(idx)} on:mouseout={() => rmCurrHoverImgIdx()} on:blur={() => rmCurrHoverImgIdx()} on:click={(e) => setLightbox(e, splashImgs, 0, imgObj)} src={getTinyImgUrl(imgObj.img)} class=" hover:cursor-pointer max-w-full max-h-full"/>
         </div>
         {/each}
     <!-- <img src={getImgUrl(splashImgs[1])} class="max-w-full max-h-full"/> -->
@@ -101,7 +98,7 @@
 {/if}
 
 {#if currHoverImgIdx !== null}
-    <div class="fixed bottom-8 w-screen flex justify-center">
+    <div class="fixed bottom-4 w-screen flex justify-center">
         <StyledMainText>
             <PortableText {components} value={splashImgs[currHoverImgIdx].caption}></PortableText>
         </StyledMainText>
