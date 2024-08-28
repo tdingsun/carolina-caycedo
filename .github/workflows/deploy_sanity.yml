@@ -16,6 +16,7 @@ jobs:
       - name: Deploy Sanity Studio
         run: |
           cd studio
+          echo node $(node -v)
           npx sanity deploy
         env:
           SANITY_AUTH_TOKEN: ${{ secrets.SANITY_AUTH_TOKEN }}
