@@ -37,43 +37,70 @@
         return url;
     }
 
+
     let moonCoords: any;
+    const TWO_PI = Math.PI * 2;
 
     onMount(() => {
-        const getMovingMoonCoords = (t: number, direction: number) => {
+
+        const getMoonCoords = () => {
             moonCoords = new Array(splashImgs.length);
-            let centerX = window.innerWidth * 0.5 - 24;
-            let centerY = window.innerHeight * 0.5 - 24;
-            let r = Math.min(centerX, centerY) - 36;
+        
+            let padding = window.innerWidth < 640 ? 12: 36;
+            let offset = window.innerWidth < 640 ? 20: 24;
+            let centerX = window.innerWidth * 0.5 - offset;
+            let centerY = window.innerHeight * 0.5 - offset;
+            let r = Math.min(centerX, centerY) - padding;
 
             for(let i = 0; i < splashImgs.length; i++){
-                if((direction * Math.cos(2 * Math.PI / (splashImgs.length) * (i+1)) >= 0)){
-                    let x = r * Math.cos(2 * Math.PI / (splashImgs.length) * (i + 1)) + centerX;
-                    let y = r * Math.sin(2 * Math.PI / (splashImgs.length) * (i + 1)) + centerY;
-                    moonCoords[i] = [x, y];
-                } else {
-                    let x = centerX - direction * t*(r * Math.cos(2 * Math.PI / (splashImgs.length) * (i + 1)));
-                    let y = r * Math.sin(2 * Math.PI / (splashImgs.length) * (i + 1)) + centerY;
-                    moonCoords[i] = [x, y];
-                }
+                let x = r * Math.cos(TWO_PI / (splashImgs.length) * (i + 1)) + centerX;
+                let y = r * Math.sin(TWO_PI / (splashImgs.length) * (i + 1)) + centerY;
+                moonCoords[i] = [x, y];
             }
         }
+ 
 
-        let convertConst = Math.PI/180
-        let direction = 1; 
-        setInterval(() => {
-            const d = new Date(); 
-            let seconds = d.getSeconds();
-            let radians = seconds * convertConst * 3;
-            let waneFactor = Math.cos(radians);
-            getMovingMoonCoords(waneFactor, direction);
-            if(seconds === 59){
-                if(direction === -1){
-                    moonCoords = new Array(splashImgs.length).fill([window.innerWidth,window.innerHeight]);
-                }
-                direction = -1 * direction;
-            }
-        }, 1000)
+        window.onresize = () => {
+            getMoonCoords();
+        }
+
+        getMoonCoords();
+
+
+    //     const getMovingMoonCoords = (t: number, direction: number) => {
+    //         moonCoords = new Array(splashImgs.length);
+    //         let centerX = window.innerWidth * 0.5 - 24;
+    //         let centerY = window.innerHeight * 0.5 - 24;
+    //         let r = Math.min(centerX, centerY) - 36;
+
+    //         for(let i = 0; i < splashImgs.length; i++){
+    //             if((direction * Math.cos(2 * Math.PI / (splashImgs.length) * (i+1)) >= 0)){
+    //                 let x = r * Math.cos(2 * Math.PI / (splashImgs.length) * (i + 1)) + centerX;
+    //                 let y = r * Math.sin(2 * Math.PI / (splashImgs.length) * (i + 1)) + centerY;
+    //                 moonCoords[i] = [x, y];
+    //             } else {
+    //                 let x = centerX - direction * t*(r * Math.cos(2 * Math.PI / (splashImgs.length) * (i + 1)));
+    //                 let y = r * Math.sin(2 * Math.PI / (splashImgs.length) * (i + 1)) + centerY;
+    //                 moonCoords[i] = [x, y];
+    //             }
+    //         }
+    //     }
+
+    //     let convertConst = Math.PI/180
+    //     let direction = 1; 
+    //     setInterval(() => {
+    //         const d = new Date(); 
+    //         let seconds = d.getSeconds();
+    //         let radians = seconds * convertConst * 3;
+    //         let waneFactor = Math.cos(radians);
+    //         getMovingMoonCoords(waneFactor, direction);
+    //         if(seconds === 59){
+    //             if(direction === -1){
+    //                 moonCoords = new Array(splashImgs.length).fill([window.innerWidth,window.innerHeight]);
+    //             }
+    //             direction = -1 * direction;
+    //         }
+    //     }, 1000)
     })
 
     let currHoverImgIdx: number|null = null;
@@ -89,8 +116,8 @@
 {#if browser && moonCoords}
 <div class="w-full h-screen flex justify-center items-center p-4 bg-gray-300">
         {#each splashImgs as imgObj, idx}
-        <div style="left:{moonCoords[idx][0]}px; top:{moonCoords[idx][1]}px;" class="w-12 h-12 fixed">
-            <img alt={imgObj.alt} on:mouseover={() => setCurrHoverImgIdx(idx)} on:focus={() => setCurrHoverImgIdx(idx)} on:mouseout={() => rmCurrHoverImgIdx()} on:blur={() => rmCurrHoverImgIdx()} on:click={(e) => setLightbox(e, splashImgs, 0, imgObj)} src={getTinyImgUrl(imgObj.img)} class=" hover:cursor-pointer max-w-full max-h-full"/>
+        <div style="left:{moonCoords[idx][0]}px; top:{moonCoords[idx][1]}px;" class="w-10 h-10 sm:w-12 sm:h-12 fixed rounded-full overflow-hidden">
+            <img alt={imgObj.alt} on:mouseover={() => setCurrHoverImgIdx(idx)} on:focus={() => setCurrHoverImgIdx(idx)} on:mouseout={() => rmCurrHoverImgIdx()} on:blur={() => rmCurrHoverImgIdx()} on:click={(e) => setLightbox(e, splashImgs, 0, imgObj)} src={getTinyImgUrl(imgObj.img)} class=" hover:cursor-pointer w-full h-full object-cover object-center"/>
         </div>
         {/each}
     <!-- <img src={getImgUrl(splashImgs[1])} class="max-w-full max-h-full"/> -->
