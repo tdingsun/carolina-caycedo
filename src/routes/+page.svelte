@@ -30,9 +30,13 @@
         }
 	};
 	export let data: PageData;
+
+	let splashVids = data.splashPage.splashVids;
+    let vidIndex = Math.floor(Math.random() * splashVids.length);
+
 </script>
 
-<VidSplash splashVids={data.splashPage.splashVids}></VidSplash>
+<VidSplash splashVid={splashVids[vidIndex].url}></VidSplash>
 <ImgSplash2 splashImgs={data.splashPage.splashImgs}></ImgSplash2>
 
 <div

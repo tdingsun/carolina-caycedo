@@ -6,3 +6,5 @@ export const load = ( async () => {
         portfolioFiles
     };
 }) satisfies LayoutLoad;
+
+export const prerender = true;
