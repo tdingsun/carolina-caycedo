@@ -1,5 +1,5 @@
-import {defineType, defineArrayMember} from 'sanity'
-
+import {defineType, defineArrayMember, BlockStyleProps} from 'sanity'
+import {Text} from '@sanity/ui'
 /**
  * This is the schema definition for the rich text fields used for
  * for this blog studio. When you import it in schemas.js it can be
@@ -10,6 +10,8 @@ import {defineType, defineArrayMember} from 'sanity'
  *    type: 'blockContent'
  *  }
  */
+
+
 export default defineType({
   title: 'Block Content',
   name: 'blockContent',
@@ -23,6 +25,11 @@ export default defineType({
       // you want and decide how you want to deal with it where you want to
       // use your content.
       styles: [
+        {title: 'small', value: 'small', component: 
+          (props: BlockStyleProps) => 
+          <Text size={1}>
+            {props.children}
+          </Text>},
         {title: 'Normal', value: 'normal'},
         {title: 'H1', value: 'h1'},
         {title: 'H2', value: 'h2'},

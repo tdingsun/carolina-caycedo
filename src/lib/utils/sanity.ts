@@ -46,6 +46,8 @@ export interface AboutPage {
 	aboutPageBlurb?: any;
 	coverVideo?: any;
 	contactLinks?: Link[];
+	coverImage?: any;
+	useImage?: boolean;
 }
 
 export interface SplashPage {

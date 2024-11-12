@@ -16,6 +16,19 @@ export default defineType({
             type: 'file'
         }),
         defineField({
+            name: 'coverImage',
+            title: 'About Page Background Image',
+            type: 'image'
+        }),
+        defineField({
+            name: 'useImage',
+            title: 'Use Image for background?',
+            type: 'boolean',
+            description: 'Set to Use Image to override the video with a background image.',
+            initialValue: false,
+            hidden: ({document}) => !document?.coverImage
+        }),
+        defineField({
             name: 'contactLinks',
             title: 'Contact Links',
             type: 'array',
