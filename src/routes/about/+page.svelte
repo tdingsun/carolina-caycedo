@@ -7,10 +7,12 @@
 	import type { PageData } from './$types';
 	import StyledNavLink from '$lib/components/StyledNavLink.svelte';
 	import StyledMainText from '$lib/components/StyledMainText.svelte';
-	import { getImgUrl } from '$lib/stores';
+	import { getImgUrl, aboutPageDarkText } from '$lib/stores';
 	import { browser } from '$app/environment';
 	import StyledSmallParagraph from '$lib/components/StyledSmallParagraph.svelte';
 	export let data: PageData;
+	$aboutPageDarkText = data.aboutPage.useDarkText;
+
 	const components: Partial<PortableTextComponents> = {
 		block: {
             small: StyledSmallParagraph,
@@ -46,7 +48,7 @@
 
 <div class="max-w-2xl lg:max-w-5xl p-4 sm:p-8 tracking-wide w-full relative pointer-events-none overscroll-contain">
 	<StyledMainText
-		class="text-xl md:text-2xl sm:pb-16 ![text-shadow:_0px_0px_1px_cornsilk] sm:!leading-[1.3] overscroll-contain"
+		class="text-xl md:text-2xl sm:pb-16 {$aboutPageDarkText ? '![text-shadow:_0px_0px_1px_#1C2F2F]' : '![text-shadow:_0px_0px_1px_cornsilk]'} sm:!leading-[1.3] overscroll-contain"
 	>
 		<PortableText {components} value={data.aboutPage.aboutPageBlurb}></PortableText>
 	</StyledMainText>

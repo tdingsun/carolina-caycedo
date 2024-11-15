@@ -9,6 +9,10 @@ export const currLightboxImageIdx = writable<number>(undefined);
 
 export const currLightboxDescription = writable<any>(undefined);
 
+export const splashPageDarkText = writable<boolean>(false);
+export const aboutPageDarkText = writable<boolean>(false);
+
+
 export const getImgUrl = (imgRef: any) => {
 	return urlFor(imgRef)
 		.width(Math.min(window.innerWidth * 2, 2400))

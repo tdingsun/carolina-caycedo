@@ -29,6 +29,13 @@ export default defineType({
             hidden: ({document}) => !document?.coverImage
         }),
         defineField({
+            name: 'useDarkText',
+            title: 'Use Dark Text',
+            description: 'Toggle to use dark colored text instead of light colored.',
+            type: "boolean",
+            initialValue: false,
+        }),
+        defineField({
             name: 'contactLinks',
             title: 'Contact Links',
             type: 'array',

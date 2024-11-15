@@ -41,6 +41,13 @@ export default defineType({
                 title: 'Video',
                 type: 'file'
             }]
+        }),
+        defineField({
+            name: 'useDarkText',
+            title: 'Use Dark Text',
+            description: 'Toggle to use dark colored text instead of light colored.',
+            type: "boolean",
+            initialValue: false,
         })
     ],
     preview: {

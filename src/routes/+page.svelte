@@ -6,7 +6,8 @@
 		closeLightbox,
 		setNextLightboxImage,
 		setPrevLightboxImage,
-		currLightboxDescription
+		currLightboxDescription,
+		splashPageDarkText
 	} from '$lib/stores';
 
 	import ImgSplash2 from '$lib/components/ImgSplash2.svelte';
@@ -30,7 +31,7 @@
         }
 	};
 	export let data: PageData;
-
+	$splashPageDarkText = data.splashPage.useDarkText;
 	let splashVids = data.splashPage.splashVids;
     let vidIndex = Math.floor(Math.random() * splashVids.length);
 
@@ -86,7 +87,7 @@
 		</button>
 	</div>
 
-	<div class="w-full sm:hidden flex justify-center">
+	<div class="w-full sm:hidden flex justify-center px-2 text-center">
 		<StyledMainText class="text-xl">
 			<PortableText {components} value={$currLightboxDescription}></PortableText>
 		</StyledMainText>
@@ -127,7 +128,7 @@
 		</button>
 	</div>
 
-	<div class="fixed bottom-0 w-full hidden sm:flex justify-center pb-4">
+	<div class="fixed bottom-0 w-full hidden sm:flex justify-center pb-4 px-4 text-center">
 		<StyledMainText>
 			<PortableText {components} value={$currLightboxDescription}></PortableText>
 		</StyledMainText>

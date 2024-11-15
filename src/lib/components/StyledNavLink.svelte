@@ -1,7 +1,8 @@
 <script lang="ts">
 	import { onMount } from "svelte";
 	import StyledMainText from "./StyledMainText.svelte";
-
+    import { page } from "$app/stores";
+    import { splashPageDarkText, aboutPageDarkText } from "$lib/stores";
     let className = '';
     export {className as class}
 
@@ -34,7 +35,7 @@
 <div 
  style="left:{leftOffset}px; top:{topOffset}px;"
 class=" transition-[left,_top] duration-[5s] relative   hover:!top-0 hover:!left-0 flex justify-center items-center {className}">
-    <StyledMainText class="hover:[text-shadow:_0px_0px_1px_cornsilk]">
+    <StyledMainText class="{(($page.url.pathname === '/about' && $aboutPageDarkText) || ($page.url.pathname !== '/about' && $splashPageDarkText))  ? 'hover:[text-shadow:_0px_0px_1px_#203737]' : 'hover:[text-shadow:_0px_0px_1px_cornsilk]' } ">
         <slot></slot>
     </StyledMainText>
 

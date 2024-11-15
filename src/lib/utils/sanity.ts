@@ -48,6 +48,7 @@ export interface AboutPage {
 	contactLinks?: Link[];
 	coverImage?: any;
 	useImage?: boolean;
+	useDarkText: boolean;
 }
 
 export interface SplashPage {
@@ -55,6 +56,7 @@ export interface SplashPage {
 	_id: 'splashPage';
 	splashImgs?: any;
 	splashVids?: any;
+	useDarkText: boolean;
 }
 
 export interface PortfolioFiles {
